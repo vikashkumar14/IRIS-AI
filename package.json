@@ -14,8 +14,9 @@
     "start": "electron-vite preview",
     "dev": "electron-vite dev",
     "build": "npm run typecheck && electron-vite build",
-    "build:unpack": "npm run build && set \"PATH=%SystemRoot%\\system32;%PATH%\" && set \"ComSpec=%SystemRoot%\\system32\\cmd.exe\" && electron-builder --dir",
-    "build:win": "npm run build && set \"PATH=%SystemRoot%\\system32;%PATH%\" && set \"ComSpec=%SystemRoot%\\system32\\cmd.exe\" && electron-builder --win nsis",
+    "build:unpack": "if exist dist rmdir /s /q dist && npm run build && set \"PATH=%SystemRoot%\\system32;%PATH%\" && set \"ComSpec=%SystemRoot%\\system32\\cmd.exe\" && electron-builder --dir",
+    "build:win": "node scripts/build-win.js",
+    "release:win": "node scripts/build-win.js --publish",
     "build:mac": "electron-vite build && electron-builder --mac",
     "build:linux": "electron-vite build && electron-builder --linux"
   },
